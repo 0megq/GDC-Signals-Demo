@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Area2D.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 64, 64 )
+
+[node name="Main" type="Node2D"]
+
+[node name="Small" parent="." instance=ExtResource( 1 )]
+position = Vector2( 193, 282 )
+
+[node name="Big" parent="." instance=ExtResource( 1 )]
+position = Vector2( 485, 259 )
+
+[node name="Sprite" parent="Big" index="0"]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" parent="Big" index="1"]
+shape = SubResource( 2 )
+
+[editable path="Big"]
