@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Area2D.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+
+var touching_mouse: bool = false
+
+
+func _ready() -> void:
+	connect(\"mouse_exited\", self, \"_on_Area2D_mouse_exited\")
+
+
+func _process(delta: float) -> void:
+	if touching_mouse and Input.is_mouse_button_pressed(BUTTON_LEFT):
+		print(name)
+
+
+func _on_Area2D_mouse_entered() -> void:
+	touching_mouse = true
+
+
+func _on_Area2D_mouse_exited() -> void:
+	touching_mouse = false
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 64, 64 )
+
+[node name="Main" type="Node2D"]
+
+[node name="Small" parent="." instance=ExtResource( 1 )]
+position = Vector2( 193, 282 )
+
+[node name="Big" parent="." instance=ExtResource( 1 )]
+position = Vector2( 485, 259 )
+script = SubResource( 1 )
+
+[node name="Sprite" parent="Big" index="0"]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" parent="Big" index="1"]
+shape = SubResource( 2 )
+
+[editable path="Big"]
